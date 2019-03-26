@@ -2,6 +2,7 @@ package myblog.pojo;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "blogger", schema = "myblog", catalog = "")
@@ -11,10 +12,11 @@ public class BloggerEntity {
     private String nickname;
     private String psw;
     private String email;
-    private Date createtime;
+    private Timestamp createtime;
     private String deleteflag;
     private Integer detetorid;
-    private Date deletetime;
+    private Timestamp deletetime;
+
 
     @Id
     @Column(name = "id", nullable = false)
@@ -69,11 +71,11 @@ public class BloggerEntity {
 
     @Basic
     @Column(name = "createtime", nullable = true)
-    public Date getCreatetime() {
+    public Timestamp getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
     }
 
@@ -99,11 +101,11 @@ public class BloggerEntity {
 
     @Basic
     @Column(name = "deletetime", nullable = true)
-    public Date getDeletetime() {
+    public Timestamp getDeletetime() {
         return deletetime;
     }
 
-    public void setDeletetime(Date deletetime) {
+    public void setDeletetime(Timestamp deletetime) {
         this.deletetime = deletetime;
     }
 

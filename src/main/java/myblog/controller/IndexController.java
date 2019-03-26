@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class IndexController {
         bloggerEntity.setName("666");
         bloggerEntity.setNickname("陈振高");
         bloggerEntity.setPsw("123");
-        bloggerEntity.setCreatetime(new Date(System.currentTimeMillis()));
+        bloggerEntity.setCreatetime(new Timestamp(System.currentTimeMillis()));
         bloggerService.save(bloggerEntity);
 
         List<BloggerEntity> list=bloggerService.findAll();
