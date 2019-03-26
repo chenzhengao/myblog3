@@ -70,16 +70,13 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
 
     @Override
     public T findByOne(PK id) {
-        return this.getSession().find(clazz,id);
+        return (T)this.getSession().get(clazz,id);
     }
 
     @Override
-    public List<T> findAll() {
-        CriteriaBuilder build = this.getSession().getCriteriaBuilder();
-        CriteriaQuery<T> criteria = build.createQuery(clazz);
-        criteria.from(clazz);
-        Query query=this.getSession().createQuery(criteria);
-        return (List<T>)query.getResultList();
+    public  List<T> findAll() {
+        return (List<T>)this.getSession().createCriteria(clazz).list();
+        //return null;
     }
 
     @Override
@@ -90,7 +87,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
 
     @Override
     public boolean deleteById(PK id) {
-        T t=this.getSession().get(clazz,id);
+        T t=(T)this.getSession().get(clazz,id);
         if(t==null){
             return false;
         }

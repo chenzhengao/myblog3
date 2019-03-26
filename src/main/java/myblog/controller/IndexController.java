@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -31,10 +32,15 @@ public class IndexController {
     @RequestMapping("/save")
     public void save(){
         BloggerEntity bloggerEntity=new BloggerEntity();
-        bloggerEntity.setName("czg");
-        bloggerEntity.setNickname("czg");
+        bloggerEntity.setName("666");
+        bloggerEntity.setNickname("陈振高");
         bloggerEntity.setPsw("123");
+        bloggerEntity.setCreatetime(new Date(System.currentTimeMillis()));
         bloggerService.save(bloggerEntity);
-        System.out.println("=============新增");
+
+        List<BloggerEntity> list=bloggerService.findAll();
+        System.out.println(list.size());
+
+        //bloggerService.delete(bloggerService.findByOne(1));
     }
 }

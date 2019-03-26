@@ -1,6 +1,7 @@
 package myblog.service.serviceImpl;
 
 import lombok.Data;
+import myblog.dao.BaseDao;
 import myblog.dao.BloggerDao;
 import myblog.pojo.BloggerEntity;
 import myblog.service.BloggerService;
@@ -14,13 +15,13 @@ import javax.annotation.Resource;
 @Service("bloggerService")
 @Data
 @Transactional
-public class BloggerServiceImpl implements BloggerService {
+public class BloggerServiceImpl extends BaseServiceImpl<BloggerEntity,Integer> implements BloggerService {
 
+    //注入dao
     @Resource(name = "BloggerDao")
-    private BloggerDao bloggerDao;
-
-    @Override
-    public void save(BloggerEntity bloggerEntity) {
-         bloggerDao.save(bloggerEntity);
+    public void setDao(BaseDao<BloggerEntity,Integer> dao){
+        super.setDao(dao);
     }
+
+
 }

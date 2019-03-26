@@ -14,14 +14,7 @@ import java.io.Serializable;
 //用于将数据访问层 (DAO 层 ) 的类标识为 Spring Bean
 @Repository("BloggerDao")
 @Transactional
-public class BloggerDaoImpl implements BloggerDao {
+public class BloggerDaoImpl extends BaseDaoImpl<BloggerEntity,Integer> implements BloggerDao {
 
-    @Resource(name = "sessionFactory")
-    private SessionFactory sessionFactory;
 
-    @Override
-    public void save(BloggerEntity bloggerEntity) {
-        Session session= sessionFactory.getCurrentSession();
-        session.save(bloggerEntity);
-    }
 }
