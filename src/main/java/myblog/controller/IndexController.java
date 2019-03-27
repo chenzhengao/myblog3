@@ -31,7 +31,7 @@ public class IndexController {
     }
 
     @RequestMapping("/save")
-    public void save(){
+    public BloggerEntity save(){
         BloggerEntity bloggerEntity=new BloggerEntity();
         bloggerEntity.setName("666");
         bloggerEntity.setNickname("陈振高");
@@ -41,7 +41,7 @@ public class IndexController {
 
         List<BloggerEntity> list=bloggerService.findAll();
         System.out.println(list.size());
-
+        return list.get(0);
         //bloggerService.delete(bloggerService.findByOne(1));
     }
 }
