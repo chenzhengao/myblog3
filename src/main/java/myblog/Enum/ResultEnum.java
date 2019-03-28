@@ -2,7 +2,7 @@ package myblog.Enum;
 
 public enum ResultEnum {
     SUCCESS(0,"请求成功"),
-    ERR(500,"服务器异常")
+    TEST(501,"测试使用")
     ;
 
     private Integer code;

@@ -1,6 +1,8 @@
 package myblog.controller;
 
 import lombok.Data;
+import myblog.Enum.ResultEnum;
+import myblog.exception.BusinessMessageException;
 import myblog.pojo.BloggerEntity;
 import myblog.service.BloggerService;
 
@@ -40,10 +42,11 @@ public class IndexController {
 
         //bloggerService.save(bloggerEntity);
 
-        List<BloggerEntity> list=bloggerService.findAll();
+        //List<BloggerEntity> list=bloggerService.findAll();
+        throw new BusinessMessageException(ResultEnum.TEST);
 
         //System.out.println(list.size());
-        return list.get(0);
+        //return list.get(0);
         //bloggerService.delete(bloggerService.findByOne(1));
     }
 }

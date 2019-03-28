@@ -1,5 +1,6 @@
 package myblog.handler;
 
+import myblog.exception.BusinessMessageException;
 import myblog.pojo.request.ResultDTO;
 import myblog.util.ExceptionUtil;
 import myblog.util.ResultDTOUtil;
@@ -25,6 +26,29 @@ import java.net.HttpURLConnection;
 @ControllerAdvice
 public class SystemExceptionHandler {
 
+
+
+    /**
+     * 可预知的业务需要处理的异常处理
+     * @param request
+     * @param response
+     * @param e
+     * @return
+     */
+    @ExceptionHandler({BusinessMessageException.class})
+    @ResponseBody
+    public ResultDTO businessExceptionHandle(HttpServletRequest request, HttpServletResponse response, BusinessMessageException e){
+        ResultDTO resultDTO=ResultDTOUtil.customExceptionResult(e);
+        return resultDTO;
+    }
+
+    /**
+     * 无法预知的异常处理
+     * @param request
+     * @param response
+     * @param e
+     * @return
+     */
     @ExceptionHandler({Exception.class})
     @ResponseBody
     public ResultDTO handle(HttpServletRequest request, HttpServletResponse response, Exception e){

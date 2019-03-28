@@ -1,6 +1,7 @@
 package myblog.util;
 
 import myblog.Enum.ResultEnum;
+import myblog.exception.BusinessMessageException;
 import myblog.pojo.request.ResultDTO;
 import myblog.pojo.request.ResultErrorDTO;
 
@@ -34,14 +35,22 @@ public class ResultDTOUtil {
     }
 
     /**
+     * 自定义异常情况：自定义code,msg,用于校验提示语 -无返回数据
+     * @return
+     */
+    public static ResultDTO customExceptionResult(BusinessMessageException e){
+        return  customExceptionResult(e,null);
+    }
+
+    /**
      * 自定义异常情况：自定义code,msg,用于校验提示语
      * @param object
      * @return
      */
-    public static ResultDTO customExceptionResult(ResultEnum resultEnum,Object object){
+    public static ResultDTO customExceptionResult(BusinessMessageException e, Object object){
         ResultDTO resultDTO=new ResultDTO();
-        resultDTO.setCode(resultEnum.getCode());
-        resultDTO.setMsg(resultEnum.getMsg());
+        resultDTO.setCode(e.getCode());
+        resultDTO.setMsg(e.getMsg());
         resultDTO.setData(object);
         return  resultDTO;
     }
