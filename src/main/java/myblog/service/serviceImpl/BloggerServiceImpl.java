@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 public class BloggerServiceImpl extends BaseServiceImpl<BloggerEntity,Integer> implements BloggerService {
 
     //注入dao
+    @Override
     @Resource(name = "BloggerDao")
     public void setDao(BaseDao<BloggerEntity,Integer> dao){
         super.setDao(dao);

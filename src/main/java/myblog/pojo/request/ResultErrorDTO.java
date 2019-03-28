@@ -1,8 +1,11 @@
 package myblog.pojo.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 系统发生异常时，错误信息封装类
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultErrorDTO {
     //响应状态码
     private Integer status;

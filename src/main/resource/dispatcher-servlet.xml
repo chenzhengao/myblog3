@@ -21,8 +21,18 @@
     </bean>
 
     <!-- 自动扫描装配 -->
+    <!--<context:component-scan base-package="myblog"/>-->
+    <!-- 使用Annotation自动注册Bean,扫描@Controller和@ControllerAdvice-->
     <context:component-scan base-package="myblog"/>
+        <!--&lt;!&ndash; base-package 如果多个，用“,”分隔 &ndash;&gt;-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
+        <!--&lt;!&ndash;控制器增强，使一个Contoller成为全局的异常处理类，类中用@ExceptionHandler方法注解的方法可以处理所有Controller发生的异常&ndash;&gt;-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />-->
+    <!--</context:component-scan>-->
     <!-- 使用annotation定义事务 这个事务配置，需要配在web.xml中DispatcherServlet声明的xml,要不然导致在servlet时调用不到事务管理器-->
     <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--全局异常处理-->
+    <!--<bean class="myblog.handler.SystemExceptionResolver"></bean>-->
 
 </beans>

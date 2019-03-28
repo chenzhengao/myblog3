@@ -1,22 +1,34 @@
 package myblog.handler;
 
 import myblog.pojo.request.ResultDTO;
+import myblog.util.ExceptionUtil;
+import myblog.util.ResultDTOUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.HttpURLConnection;
+
 
 /**
- * 全局异常处理
- */
+*   基于注解：全局异常处理
+* @Author:         chenzhengao
+* @CreateDate:     2019/3/28 11:54
+*/
 @ControllerAdvice
 public class SystemExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     @ResponseBody
-    public ResultDTO handle(HttpServletRequest request, HttpServletResponse response,Exception e){
-       return null;
+    public ResultDTO handle(HttpServletRequest request, HttpServletResponse response, Exception e){
+        ResultDTO resultDTO=ResultDTOUtil.errResult(500,e.getMessage(), ExceptionUtil.getExceptionAllInformation(e));
+        return resultDTO;
     }
 }

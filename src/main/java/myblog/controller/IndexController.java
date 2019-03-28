@@ -32,15 +32,17 @@ public class IndexController {
 
     @RequestMapping("/save")
     public BloggerEntity save(){
-        BloggerEntity bloggerEntity=new BloggerEntity();
-        bloggerEntity.setName("666");
-        bloggerEntity.setNickname("陈振高");
-        bloggerEntity.setPsw("123");
-        bloggerEntity.setCreatetime(new Timestamp(System.currentTimeMillis()));
-        bloggerService.save(bloggerEntity);
+//        BloggerEntity bloggerEntity=new BloggerEntity();
+//        bloggerEntity.setName("666");
+//        bloggerEntity.setNickname("陈振高");
+//        bloggerEntity.setPsw("123");
+//        bloggerEntity.setCreatetime(new Timestamp(System.currentTimeMillis()));
+
+        //bloggerService.save(bloggerEntity);
 
         List<BloggerEntity> list=bloggerService.findAll();
-        System.out.println(list.size());
+
+        //System.out.println(list.size());
         return list.get(0);
         //bloggerService.delete(bloggerService.findByOne(1));
     }
