@@ -16,7 +16,7 @@ public class HttpUtil {
      */
     public static String getFullURL(HttpServletRequest request){
         String url=request.getScheme() +"://" + request.getServerName()
-                + ":" +request.getServerPort()+ request.getServletPath();
+                + ":" +request.getServerPort()+request.getContextPath()+ request.getServletPath();
 
         if (request.getQueryString() != null){
             url += "?" + request.getQueryString();
