@@ -76,7 +76,6 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     @Override
     public  List<T> findAll() {
         return (List<T>)this.getSession().createCriteria(clazz).list();
-        //return null;
     }
 
     @Override

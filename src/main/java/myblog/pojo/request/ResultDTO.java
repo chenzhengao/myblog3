@@ -3,8 +3,10 @@ package myblog.pojo.request;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * 返回模型：返回前台数据格式统一
- */
+*   返回模型：返回前台数据格式统一
+* @Author:         chenzhengao
+* @CreateDate:     2019/3/29 10:43
+*/
 //注解作用：字段为null时，不返回前台
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultDTO<T> {
@@ -13,11 +15,15 @@ public class ResultDTO<T> {
     //提示信息:枚举中定义的提示信息
     private String msg;
     //接口调用成功标志 用于区分自定义异常及程序异常标志，默认为true，程序异常时为false
-    private Boolean successFlag=true;
+    private Boolean successFlag;
     //成功返回数据
     private T data;
     //系统发生异常时，需要收集的数据，默认为null
     private ResultErrorDTO err=null;
+
+    {
+        successFlag=true;
+    }
 
     public ResultErrorDTO getErr() {
         return err;

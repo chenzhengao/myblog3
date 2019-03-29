@@ -26,10 +26,10 @@ import java.net.HttpURLConnection;
 @ControllerAdvice
 public class SystemExceptionHandler {
 
-
+    public static final Logger logger=LoggerFactory.getLogger(SystemExceptionHandler.class);
 
     /**
-     * 可预知的业务需要处理的异常处理
+     * 可预知的业务需要的异常处理
      * @param request
      * @param response
      * @param e
@@ -52,7 +52,8 @@ public class SystemExceptionHandler {
     @ExceptionHandler({Exception.class})
     @ResponseBody
     public ResultDTO handle(HttpServletRequest request, HttpServletResponse response, Exception e){
-        ResultDTO resultDTO=ResultDTOUtil.errResult(500,e.getMessage(), ExceptionUtil.getExceptionAllInformation(e));
+
+        ResultDTO resultDTO=ResultDTOUtil.errResult(response.getStatus(),e.getMessage(), ExceptionUtil.getExceptionAllInformation(e),request.getRequestURI());
         return resultDTO;
     }
 }

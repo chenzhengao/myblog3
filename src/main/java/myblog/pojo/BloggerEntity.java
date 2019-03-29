@@ -1,5 +1,7 @@
 package myblog.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -12,9 +14,11 @@ public class BloggerEntity {
     private String nickname;
     private String psw;
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Timestamp createtime;
     private String deleteflag;
     private Integer detetorid;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Timestamp deletetime;
 
 

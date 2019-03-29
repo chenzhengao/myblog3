@@ -5,9 +5,13 @@ import myblog.exception.BusinessMessageException;
 import myblog.pojo.request.ResultDTO;
 import myblog.pojo.request.ResultErrorDTO;
 
+import java.sql.Timestamp;
+
 /**
- * 构造返回模型的工具类
- */
+*   构造返回模型的工具类
+* @Author:         chenzhengao
+* @CreateDate:     2019/3/29 11:31
+*/
 public class ResultDTOUtil {
 
     //请求异常标志
@@ -63,7 +67,7 @@ public class ResultDTOUtil {
      * @param allMsg
      * @return
      */
-    public static ResultDTO errResult(Integer errCode,String errmsg,String allMsg){
+    public static ResultDTO errResult(Integer errCode,String errmsg,String allMsg,String url){
         ResultDTO resultDTO=new ResultDTO();
         //请求成功标志为false
         resultDTO.setSuccessFlag(SUCCESSFLAG);
@@ -72,6 +76,8 @@ public class ResultDTOUtil {
         err.setStatus(errCode);
         err.setErrMsg(errmsg);
         err.setAllInfo(allMsg);
+        err.setCurrentTime(new Timestamp(System.currentTimeMillis()));
+        err.setURL(url);
 
         resultDTO.setErr(err);
         return  resultDTO;

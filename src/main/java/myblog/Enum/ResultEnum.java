@@ -1,8 +1,11 @@
 package myblog.Enum;
-
+/**
+*   返回参数枚举类
+* @Author:         chenzhengao
+* @CreateDate:     2019/3/29 12:00
+*/
 public enum ResultEnum {
-    SUCCESS(0,"请求成功"),
-    TEST(501,"测试使用")
+    SUCCESS(0,"请求成功")
     ;
 
     private Integer code;
