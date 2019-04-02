@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -56,5 +57,11 @@ public class IndexController {
         //System.out.println(list.size());
         return list.get(100);
         //bloggerService.delete(bloggerService.findByOne(1));
+    }
+    @RequestMapping("/login")
+    public ResultDTO login(HttpSession session){
+        BloggerEntity bloggerEntity=bloggerService.findByOne(7);
+        session.setAttribute("BLOG",bloggerEntity);
+        return null;
     }
 }
