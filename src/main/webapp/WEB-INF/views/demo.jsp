@@ -15,6 +15,6 @@
     <title>Title</title>
 </head>
 <body>
- ${requestScope.test1}
+<img alt="image" src="../myblog/image/getimages" width="100" height="100">艾斯
 </body>
 </html>

@@ -1,6 +1,7 @@
 package myblog.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
 *   Http工具类：获得Http相关信息

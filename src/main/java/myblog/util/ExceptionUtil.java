@@ -1,5 +1,7 @@
 package myblog.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -11,6 +13,7 @@ import java.util.Date;
 * @Author:         chenzhengao
 * @CreateDate:     2019/3/29 11:30
 */
+@Slf4j
 public class ExceptionUtil {
 
 
@@ -29,6 +32,7 @@ public class ExceptionUtil {
                     + method + "时在第" + stackTraceElement.getLineNumber()
                     + "行代码处发生异常!异常类型:" + ex.getClass().getName()+"\n");
         }
+        log.warn(messages.toString());
         return messages.toString();
     }
 

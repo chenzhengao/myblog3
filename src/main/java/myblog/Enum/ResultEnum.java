@@ -5,7 +5,8 @@ package myblog.Enum;
 * @CreateDate:     2019/3/29 12:00
 */
 public enum ResultEnum {
-    SUCCESS(0,"请求成功")
+    SUCCESS(0,"请求成功"),
+    LOGINERR(401,"登录权限失效")
     ;
 
     private Integer code;

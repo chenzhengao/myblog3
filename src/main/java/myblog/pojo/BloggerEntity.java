@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "blogger", schema = "myblog", catalog = "")
@@ -20,6 +21,7 @@ public class BloggerEntity {
     private Integer detetorid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Timestamp deletetime;
+    private byte[] image;
 
 
     @Id
@@ -113,24 +115,51 @@ public class BloggerEntity {
         this.deletetime = deletetime;
     }
 
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "image")
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BloggerEntity that = (BloggerEntity) o;
+        BloggerEntity blogger = (BloggerEntity) o;
 
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
-        if (psw != null ? !psw.equals(that.psw) : that.psw != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (createtime != null ? !createtime.equals(that.createtime) : that.createtime != null) return false;
-        if (deleteflag != null ? !deleteflag.equals(that.deleteflag) : that.deleteflag != null) return false;
-        if (detetorid != null ? !detetorid.equals(that.detetorid) : that.detetorid != null) return false;
-        if (deletetime != null ? !deletetime.equals(that.deletetime) : that.deletetime != null) return false;
+        if (id != blogger.id) return false;
+        if (name != null ? !name.equals(blogger.name) : blogger.name != null) return false;
+        if (nickname != null ? !nickname.equals(blogger.nickname) : blogger.nickname != null) return false;
+        if (psw != null ? !psw.equals(blogger.psw) : blogger.psw != null) return false;
+        if (email != null ? !email.equals(blogger.email) : blogger.email != null) return false;
+        if (createtime != null ? !createtime.equals(blogger.createtime) : blogger.createtime != null) return false;
+        if (deleteflag != null ? !deleteflag.equals(blogger.deleteflag) : blogger.deleteflag != null) return false;
+        if (detetorid != null ? !detetorid.equals(blogger.detetorid) : blogger.detetorid != null) return false;
+        if (deletetime != null ? !deletetime.equals(blogger.deletetime) : blogger.deletetime != null) return false;
+        if (!Arrays.equals(image, blogger.image)) return false;
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "BloggerEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", psw='" + psw + '\'' +
+                ", email='" + email + '\'' +
+                ", createtime=" + createtime +
+                ", deleteflag='" + deleteflag + '\'' +
+                ", detetorid=" + detetorid +
+                ", deletetime=" + deletetime +
+                ", image=" + Arrays.toString(image) +
+                '}';
     }
 
     @Override
@@ -144,6 +173,7 @@ public class BloggerEntity {
         result = 31 * result + (deleteflag != null ? deleteflag.hashCode() : 0);
         result = 31 * result + (detetorid != null ? detetorid.hashCode() : 0);
         result = 31 * result + (deletetime != null ? deletetime.hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(image);
         return result;
     }
 }
