@@ -1,5 +1,6 @@
 package myblog.controller;
 
+import myblog.service.serviceImpl.UploadService;
 import myblog.util.ImageUtil;
 import myblog.util.UserUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,9 @@ import java.io.*;
 @RestController
 @RequestMapping("/image")
 public class ImageController {
+
+    @Resource(name="uploadService")
+    private UploadService uploadService;
 
     @RequestMapping(value="/geticons",method = RequestMethod.GET)
     public void getIcons(HttpServletRequest request, HttpServletResponse response) {
@@ -89,4 +94,19 @@ public class ImageController {
         result.setViewName("thunmbImg");
         return result;
     }
+
+    @RequestMapping(value = "/test")
+    public void test(HttpSession session){
+
+        File file=new File("C:\\Users\\97948\\Desktop\\demo.jpg");
+        //相对路径
+        String uploadPath="/image";
+        //绝对路径
+        String realPath=session.getServletContext().getRealPath(uploadPath);
+        System.out.println("真实路径："+realPath);
+        uploadService.imagemark(file,file.getName(),uploadPath,realPath);
+    }
+
+
+
 }

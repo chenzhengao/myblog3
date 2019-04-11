@@ -48,4 +48,38 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
+    <!--shiro配置-->
+    <!--anon:不需要验证 authc：需要验证之后才能访问 从小往上进行访问-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"></property>
+        <property name="loginUrl" value="login.jsp"></property>
+        <!--未验证时的错误页面-->
+        <property name="unauthorizedUrl" value="403.jsp"></property>
+        <!--过滤器链-->
+        <property name="filterChainDefinitions">
+            <value>
+                /login.jsp=anon
+                /login=anon
+                /*=authc
+            </value>
+        </property>
+    </bean>
+
+    <!--创建securityManager对象-->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <property name="realm" ref="realm"></property>
+
+    </bean>
+
+    <bean class="myblog.shiro.realm.CustomRealm" id="realm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"></property>
+    </bean>
+
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
+        <!--设置加密方式-->
+        <property name="hashAlgorithmName" value="md5"></property>
+        <!--设置加密次数-->
+        <property name="hashIterations" value="1"></property>
+    </bean>
+
 </beans>

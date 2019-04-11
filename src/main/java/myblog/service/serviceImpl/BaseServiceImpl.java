@@ -23,6 +23,10 @@ public class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T
         return baseDao.save(t);
     }
 
+    public BaseDao<T, PK> getBaseDao() {
+        return baseDao;
+    }
+
     @Override
     public void saveAll(List<T> list) {
         baseDao.saveAll(list);

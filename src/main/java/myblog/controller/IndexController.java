@@ -4,13 +4,19 @@ import lombok.Data;
 import myblog.Enum.ResultEnum;
 import myblog.exception.BusinessMessageException;
 import myblog.pojo.BloggerEntity;
+import myblog.pojo.Page;
 import myblog.pojo.request.ResultDTO;
 import myblog.service.BloggerService;
 
 import myblog.util.ResultDTOUtil;
 import myblog.util.UserUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -73,10 +79,30 @@ public class IndexController {
         return list.get(0);
         //bloggerService.delete(bloggerService.findByOne(1));
     }
-    @RequestMapping("/login")
-    public ResultDTO login(HttpSession session){
-        BloggerEntity bloggerEntity=bloggerService.findByOne(9);
-        session.setAttribute(UserUtil.SESSION_USER,bloggerEntity);
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ResultDTO login(BloggerEntity bloggerEntity,HttpSession session){
+
+        Subject subject=SecurityUtils.getSubject();
+
+        UsernamePasswordToken token=new UsernamePasswordToken(bloggerEntity.getName(),bloggerEntity.getPsw());
+
+        subject.login(token);
+        //如果登录成功
+        if(subject.isAuthenticated()){
+            System.out.println("登录成功！");
+            session.setAttribute(UserUtil.SESSION_USER,bloggerEntity);
+        }
+        return null;
+    }
+
+    @RequestMapping("/demo")
+    public ResultDTO demo(HttpSession session){
+        BloggerEntity bloggerEntity=new BloggerEntity();
+        bloggerEntity.setName("czg");
+
+        Page page=new Page();
+        page.setCurrentPage(1);
+        bloggerService.getBloggersByPage(page,bloggerEntity);
         return null;
     }
 }

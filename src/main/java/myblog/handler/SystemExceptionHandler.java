@@ -51,7 +51,7 @@ public class SystemExceptionHandler {
     @ResponseBody
     public ResultDTO handle(HttpServletRequest request, HttpServletResponse response, Exception e){
 
-        ResultDTO resultDTO=ResultDTOUtil.errResult(response.getStatus(),e.getMessage(), ExceptionUtil.getExceptionAllInformation(e),request.getRequestURI());
+        ResultDTO resultDTO=ResultDTOUtil.errResult(response.getStatus(),e.getMessage(), ExceptionUtil.getErrorMessage(e),request.getRequestURI());
         return resultDTO;
     }
 }
