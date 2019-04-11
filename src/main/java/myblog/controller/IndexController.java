@@ -13,6 +13,8 @@ import myblog.util.UserUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,10 @@ public class IndexController {
 
 
 
+    //具备admin角色才可以访问
+    @RequiresRoles("admin")
+    //具备user:select权限才可以访问,一般使用这种方式
+    @RequiresPermissions("user:select")
     @RequestMapping("/test")
     public ModelAndView test(){
         ModelAndView m=new ModelAndView();

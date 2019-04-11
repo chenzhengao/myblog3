@@ -64,4 +64,13 @@
     <!--全局异常处理-->
     <!--<bean class="myblog.handler.SystemExceptionResolver"></bean>-->
 
+    <!--开启AOP-->
+    <aop:config proxy-target-class="true"></aop:config>
+
+    <!--通过注解配置使用shiro权限 这两个注解使用：@RequiresRoles("admin") @RequiresPermissions-->
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"></property>
+    </bean>
+
 </beans>
