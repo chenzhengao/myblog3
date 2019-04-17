@@ -6,11 +6,13 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
     <!--启用spring的一些annotation -->
     <context:annotation-config/>
 
@@ -29,7 +31,7 @@
     </mvc:interceptors>
 
     <!-- 使用Annotation自动注册Bean,扫描@Controller和@ControllerAdvice-->
-    <context:component-scan base-package="myblog.controller,myblog.handler"/>
+    <context:component-scan base-package="myblog.controller,myblog.handler,myblog.task"/>
     <!--&lt;!&ndash; base-package 如果多个，用“,”分隔 &ndash;&gt;-->
 
 
@@ -72,5 +74,11 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"></property>
     </bean>
+
+    <!--开启定时任务-->
+    <!-- 开启这个配置 spring才能识别@Scheduled注解 -->
+    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
+    <task:scheduler id="qbScheduler" pool-size="10"/>
+
 
 </beans>
