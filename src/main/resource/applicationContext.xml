@@ -45,7 +45,7 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-
+    <!--开启事务注解-->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!--shiro配置-->

@@ -18,6 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginInterceptor implements HandlerInterceptor {
 
+    /**
+     * 进入（Handle）控制器之前
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @param o
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         BloggerEntity bloggerEntity= (BloggerEntity) httpServletRequest.getSession().getAttribute(UserUtil.SESSION_USER);
@@ -28,12 +36,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             throw new BusinessMessageException(ResultEnum.LOGINERR);
         }
     }
-
+    //进入（Handle）控制器之后，到返回ModelAndView之前
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
     }
-
+    //Handle执行完之后
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 

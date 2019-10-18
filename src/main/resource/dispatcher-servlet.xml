@@ -20,6 +20,7 @@
     <mvc:annotation-driven/>
 
 
+    <!--配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <!-- 拦截所有URL中的请求 -->
@@ -28,6 +29,7 @@
             <mvc:exclude-mapping path="/login"/>
             <bean class="myblog.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
+        <!--配置多个<mvc:interceptor>-->
     </mvc:interceptors>
 
     <!-- 使用Annotation自动注册Bean,扫描@Controller和@ControllerAdvice-->

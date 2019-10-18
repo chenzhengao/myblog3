@@ -3,6 +3,7 @@ package myblog.handler;
 
 
 
+import myblog.exception.BusinessMessageException;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,13 @@ public class SystemExceptionResolver implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
                                          HttpServletResponse response, Object handler, Exception ex) {
+
+        if(ex instanceof BusinessMessageException){
+            //如果是可预知的自定义的异常处理
+        }else{
+            //系统异常处理
+        }
+
         ex.printStackTrace();
         //向前台返回错误信息
         try {
